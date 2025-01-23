@@ -1,12 +1,15 @@
 import {ReactNode} from "react";
 
 type ColorObjectProp = { [p: number]: string }
+type SizeObjectProp = { [p: number]: number }
+
+type DiversityObjectProp = {color: ColorObjectProp, size: SizeObjectProp}
 
 const Diversity = (props: {
-    component: (p: { colors: ColorObjectProp}) => ReactNode, colorLength: number
+    component: (p: DiversityObjectProp) => ReactNode, size?: number
 }) => {
 
-    const turnNumber = 200
+    const turnNumber = props.size ?? 200
 
     const tab = []
 
@@ -18,10 +21,11 @@ const Diversity = (props: {
         return Math.round(Math.random() * 255)
     }
 
-    const generateColors = () => {
-        const object: ColorObjectProp = {}
-        for (let i = 0; i < props.colorLength; i++) {
-            object[i+1] = `rgba(${getRandom255()}, ${getRandom255()}, ${getRandom255()}, 1)`
+    const generateObject = () => {
+        const object: DiversityObjectProp = {color: {}, size: {}}
+        for (let i = 0; i < 20; i++) {
+            object.color[i+1] = `rgba(${getRandom255()}, ${getRandom255()}, ${getRandom255()}, 1)`
+            object.size[i+1] = Math.random()
         }
 
         return object
@@ -29,8 +33,9 @@ const Diversity = (props: {
 
     return (<div style={{ display: 'flex', flexDirection: 'row', gap: 10, width: '100%', flexWrap: 'wrap' }}>
         {tab.map((_o, index) => {
-            const Element = () => props.component({colors: generateColors()})
-            return <Element key={index} />
+            const diversity = generateObject()
+            const Element = () => props.component(diversity)
+            return <div onClick={() => alert(JSON.stringify(diversity))}><Element key={index} /></div>
         })}
     </div>)
 

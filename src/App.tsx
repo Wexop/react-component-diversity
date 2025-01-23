@@ -7,8 +7,7 @@ function App() {
   return (
     <>
         <h1>Component Diversity</h1>
-        <ClassicCardComponent borderColor={'red'} textColor={'red'} backgroundColor={'white'} />
-        <Diversity component={({colors}) => <ClassicCardComponent borderColor={colors[1]} textColor={colors[1]} backgroundColor={colors[3]} />} colorLength={3}/>
+        <Diversity size={1000} component={({color, size}) => <ClassicCardComponent borderColor={color[1]} textColor={color[2]} backgroundColor={color[3]} borderRadius={size[1] * 50} borderWidth={size[2] * 5} padding={size[3] * 10} />}/>
     </>
   )
 }

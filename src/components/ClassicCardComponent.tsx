@@ -1,12 +1,19 @@
-const ClassicCardComponent = (props: { borderColor: string, textColor: string, backgroundColor: string }) => {
+const ClassicCardComponent = (props: {
+    borderColor: string,
+    textColor: string,
+    backgroundColor: string,
+    borderWidth: number,
+    padding: number,
+    borderRadius: number
+}) => {
 
     return (
         <div style={{
             backgroundColor: props.backgroundColor,
             borderColor: props.borderColor,
-            borderWidth: 2,
-            borderRadius: 10,
-            padding: 15,
+            borderWidth: props.borderWidth,
+            borderRadius: props.borderRadius,
+            padding: props.padding,
             maxWidth: 350,
             borderStyle: 'solid'
         }}>
